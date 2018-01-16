@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+<script type = "text/javascript" 
+         src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		
+     
+          
+      <script type = "text/javascript" language = "javascript">
+      
+      
+        $(window).load(function() {
+        	
+        	var parameters=location.search.substring(1).split("&");
+        	
+        	temp=parameters[0].split("=");
+        	var batch=unescape(temp[1]);
+        	
+        	var temp=parameters[1].split("=");
+         	var semester=unescape(temp[1]);
+            	
+              $.getJSON('http://localhost:8080/ResultAnalysisCse/CSE/resultAnalysis/department?batch='+batch+'&sem='+semester, function(jd) {
+                  
+				  var data;
+            	  data='<h4><span style="padding-left:10%">Department:CSE</span><br>';
+            	  data+='<span style="padding-left:10%">Semester:'+semester+'</h4>';
+            	  data+='<table border="1" width="80%" cellpadding="10" align="center"><tr><th>Department Name</th><th>First year</th><th>Second year</th><th>Third year</th><th>Fourth year</th><th>Overall</th></tr>';
+            	  for(var i=0;i<jd.length;i++)
+            	  {
+                      data+='<tr><td>' + jd[i].dept + '</td>';
+                      data+='<td>' + jd[i].first + '%</td>';
+                      data+='<td>' + jd[i].second + '%</td>';
+                      data+='<td>' + jd[i].third + '%</td>';
+                      data+='<td>' + jd[i].fourth + '%</td>';
+                      data+='<td>' + jd[i].pass + '%</td></tr>';
+                  }
+            	  data+='</table><br><br>';
+                  $('#stage').html(data);
+     		});
+        });
+     
+         
+      </script>
+      
+      
+      <title>Result Analysis</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="d.css">
+  <link rel="stylesheet" href="c.css">
+  <script src="q.js"></script>
+  <script src="w.js"></script>
+<div class="header">
+<img src="x.png" alt="Easwari Engineering College">
+</div>
+<div class="container">
+<ul class="nav nav-tabs">
+
+    <li><a href="1.html">HOME</a></li>
+
+    <li class="active">
+	  <a href="department.html">INTER-DEPARTMENT ANALYSIS</a>
+    </li>	
+
+
+    <li class="dropdown,active">
+      	<a class="dropdown-toggle" data-toggle="dropdown" href="#">INTRA-DEPARTMENT ANALYSIS<span class="caret"></span></a>
+     		 <ul class="dropdown-menu">		
+			<li><a href="2.html">ACADEMIC YEAR</a></li>  
+</ul>
+
+    </li>
+  </ul>
+</div>
+<br><br>
+<form>
+<table align="center" width="50%">
+<tr>
+<td>
+<label for="batch"><span>Academic year</span></td>
+<td><select name="batch" class="select-field">
+<option value="2015">2015-2016</option>
+</select></label></td>
+
+<td>
+<label for="semester">
+<span>Semester</span></td><td><select name="semester" class="select-field">
+<option value="odd">Odd</option>
+<option value="even">Even</option>
+</select></label></td>
+</tr>
+
+<table width="10%" align="center" border="0">
+<tr>
+<td>
+<br> <ul class="nav nav-pills nav-justified" >
+    <li class="active"><a><input type="submit" value="Submit" formaction="dept.html" style="border:none;background-color:transparent;"></a></li>
+</td>
+</tr></table>
+</form>
+</head>
+<body>
+<div id = "stage">
+<center>
+</center>
+</div>
+</body>
+</html>
